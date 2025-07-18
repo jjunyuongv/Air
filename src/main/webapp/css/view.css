@@ -1,0 +1,88 @@
+/* webapp/css/view.css */
+
+body {
+    font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+    background-color: #f5fafd; /* write.css의 배경색과 유사하게 연한 파란색 계열 */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex; /* 제목과 테이블을 중앙 정렬하기 위해 */
+    flex-direction: column; /* 세로 방향으로 요소 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+    min-height: 100vh; /* 전체 화면 높이 사용 */
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center; /* 제목 중앙 정렬 */
+}
+
+/* 게시글 내용을 표시하는 테이블 스타일 */
+table {
+    border: 1px solid #cce0f0; /* write.css와 유사한 테두리 색상 */
+    border-collapse: collapse; /* 셀 경계선 합치기 */
+    width: 90%; /* write.css와 유사한 너비 */
+    max-width: 900px; /* 너무 넓어지지 않도록 최대 너비 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* write.css와 유사한 그림자 효과 */
+    background-color: #fff; /* 테이블 배경색 */
+}
+
+/* 테이블 셀 (<td>) 스타일 */
+table tr td {
+    padding: 12px 18px; /* 위아래, 좌우 패딩 */
+    border: 1px solid #e0e0e0; /* write.css와 유사한 셀 테두리 */
+    vertical-align: middle; /* 내용 수직 가운데 정렬 */
+    font-size: 15px;
+    line-height: 1.6; /* 줄 간격 */
+}
+
+/* 첫 번째 td (항목 이름, 예: 번호, 작성자, 제목, 내용) */
+table tr td:nth-child(1),
+table tr td:nth-child(3) { /* JSP에서 번호/작성자, 작성일/수정일 칸이 2개이므로 1번째와 3번째 td에 적용 */
+    background-color: #f8f8f8; /* write.css와 유사한 배경색 */
+    font-weight: bold;
+    width: 100px; /* 항목 이름 칸 너비 고정 (write.css의 120px보다 약간 줄임) */
+    text-align: center;
+    color: #555;
+}
+
+/* 내용 칸 (`${boardDTO.archCtnt}`)의 높이 조절 */
+table tr:last-child td[colspan="3"][height="100"] { /* 내용 td를 특정하여 높이 조정 */
+     height: 150px; /* 더 넓게 보여주기 위해 높이 증가 */
+     vertical-align: top; /* 내용은 위에서부터 보이도록 */
+     white-space: pre-wrap; /* 공백과 줄바꿈 유지 */
+}
+
+
+/* 하단 메뉴(버튼) 영역 스타일 */
+table tr:last-child td[colspan="4"] { /* colspan="4"인 마지막 td에 적용 */
+    background-color: #f2f7fc; /* write.css의 버튼 영역 배경색과 동일 */
+    text-align: center;
+    padding: 20px; /* 버튼 영역 패딩 */
+}
+
+/* 버튼 스타일 */
+table button {
+    background-color: #eaf6ff; /* write.css의 버튼 배경색과 동일 */
+    color: #333; /* 기본 텍스트 색상 검정색 유지 */
+    padding: 12px 25px; /* 버튼 패딩 */
+    margin: 0 8px; /* 버튼 간 간격 */
+    border: 1px solid #cce0f0; /* 테두리 추가 */
+    border-radius: 5px; /* 둥근 모서리 */
+    cursor: pointer; /* 마우스 오버 시 포인터 변경 */
+    font-size: 15px; /* 글꼴 크기 */
+    font-weight: bold; /* 글꼴 두께 */
+    transition: background-color 0.2s ease, transform 0.1s ease; /* 호버 시 부드러운 전환 효과 */
+    outline: none; /* 포커스 시 아웃라인 제거 */
+}
+
+table button:hover {
+    background-color: #b1ccfe; /* 호버 시 진한 파란색 */
+    color: black; /* 호버 시 글자색 흰색 */
+    transform: translateY(-2px); /* 살짝 위로 올라오는 효과 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+}

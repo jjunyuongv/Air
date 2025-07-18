@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Mapper 파일을 구성하기 위한 Doctype 설정 --> 
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 컨트롤러가 호출하는 인터페이스의 위치를 namespace로 설정 -->
+<mapper namespace="com.pj.springboot.jdbc.IBoardService">
+	<!-- 
+		목록에서 게시물의 갯수를 카운트한다. count() 함수를 사용하므로 resultType은
+		int형으로 명시해야한다. 또한 파라미터를 저장한 DTO를 사용하므로 parameterType도
+		명시되어있다. 
+	-->
+	<select id="getTotalCount" resultType="int" 
+		parameterType="com.pj.springboot.jdbc.ParameterDTO">
+		SELECT COUNT(*) FROM DOC_ARCH
+		<!-- 검색어가 있는 경우에만 where절을 동적으로 추가한다.  -->
+		<if test="searchKeyword!=null and !searchKeyword.equals('')">
+			WHERE ${searchField} LIKE '%'||#{searchKeyword}||'%'
+		</if>
+	</select>
+	
+	<!--  
+		목록 : 페이지에 출력할 게시물을 인출한다. 레코드를 인출한 결과를 반환하므로
+			resultType은 DTO객체로 설정한다. Mapper는 인출된 결과를 1차로
+			DTO에 저장한 후 2차로 List에 추가하여 반환해준다. 
+	-->
+	<select id="listPage" resultType="com.pj.springboot.jdbc.BoardDTO" 
+		parameterType="com.pj.springboot.jdbc.ParameterDTO">
+		SELECT * FROM (
+			SELECT Tb.*, rownum rNum FROM (
+				SELECT * FROM DOC_ARCH
+				<if test="searchKeyword!=null and !searchKeyword.equals('')">
+					WHERE ${searchField} LIKE '%'||#{searchKeyword}||'%'
+				</if>
+				ORDER BY ARCH_ID DESC
+			) Tb
+		)
+		WHERE rNum<![CDATA[>=]]>#{start} AND rNum<![CDATA[<=]]>#{end}
+	</select>
+
+	<insert id="write" parameterType="com.pj.springboot.jdbc.BoardDTO">
+	    INSERT INTO DOC_ARCH (
+	        ARCH_TYPE, ARCH_TITLE, ARCH_CTNT,
+	        UDT_DT, UDT_TM, UDT_USER_ID,
+	        REG_DT, REG_TM, REG_USER_ID
+	      
+    )
+    VALUES (
+	        #{archType, jdbcType=CHAR},
+	        #{archTitle, jdbcType=VARCHAR},
+	        #{archCtnt, jdbcType=VARCHAR},
+	        #{udtDt, jdbcType=CHAR},
+	        #{udtTm, jdbcType=CHAR},
+	        #{udtUserId, jdbcType=VARCHAR},
+	        #{regDt, jdbcType=CHAR},
+	        #{regTm, jdbcType=CHAR},
+	        #{regUserId, jdbcType=VARCHAR}
+
+	    )
+	</insert>
+		
+	<select id="view" resultType="com.pj.springboot.jdbc.BoardDTO"
+		parameterType="com.pj.springboot.jdbc.BoardDTO">
+	    SELECT ARCH_ID, ARCH_TYPE, ARCH_TITLE, ARCH_CTNT,
+	           UDT_DT, UDT_TM, UDT_USER_ID,
+	           REG_DT, REG_TM, REG_USER_ID
+	       
+	    FROM DOC_ARCH
+	    WHERE ARCH_ID = #{archId}
+	</select>
+	
+   <update id="edit" parameterType="com.pj.springboot.jdbc.BoardDTO">
+      UPDATE DOC_ARCH SET
+         ARCH_TITLE =#{archTitle},
+         ARCH_CTNT  =#{archCtnt},
+         UDT_DT     =TO_CHAR(SYSDATE, 'YYYYMMDD'),
+         UDT_TM     =TO_CHAR(SYSDATE, 'HH24MISS'),
+         UDT_USER_ID=#{regUserId}
+      WHERE 
+         ARCH_ID    =#{archId}
+   </update>
+	
+	<!-- 
+	삭제 : parameterType을 별도로 명시하지 않는 경우에는 파라미터의 순서대로
+				param1,2 ..와 같이 인파라미터를 설정할 수 있다.
+    -->
+	<delete id="delete" parameterType="int">
+	    DELETE FROM DOC_ARCH WHERE ARCH_ID = #{archId}
+	</delete>
+</mapper>

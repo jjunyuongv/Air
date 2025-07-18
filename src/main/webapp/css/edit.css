@@ -1,0 +1,108 @@
+/* webapp/css/edit.css */
+
+body {
+    font-family: 'Malgun Gothic', '맑은 고딕', Arial, sans-serif;
+    background-color: #f5fafd;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+
+form table {
+    border: 1px solid #cce0f0;
+    border-collapse: collapse;
+    width: 95% !important;
+    max-width: 1200px !important;
+    min-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+form table tr td {
+    padding: 12px 18px;
+    border: 1px solid #e0e0e0;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+form table tr td:first-child {
+    background-color: #f8f8f8;
+    font-weight: bold;
+    width: 120px;
+    text-align: center;
+    color: #555;
+}
+
+form table input[type="text"],
+form table textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+form table textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+form table tr:last-child td {
+    background-color: #f2f7fc;
+    text-align: center;
+    padding: 20px;
+}
+
+form table button {
+    background-color: #eaf6ff;
+    color: #333;
+    padding: 12px 25px;
+    margin: 0 8px;
+    border: 1px solid #cce0f0;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    outline: none;
+}
+
+form table button:hover {
+    background-color: #b1ccfe;
+    color: black;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+    form table, form table tr, form table td {
+        display: block;
+        width: 100%;
+    }
+
+    form table tr td:first-child {
+        text-align: left;
+        background-color: transparent;
+        font-weight: normal;
+    }
+
+    form table button {
+        width: 100%;
+        margin: 10px 0;
+    }
+}

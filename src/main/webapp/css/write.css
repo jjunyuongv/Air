@@ -1,0 +1,87 @@
+/* webapp/css/write.css */
+
+/* 자료올리기 페이지의 폼 테이블 스타일 */
+form table {
+    border: 1px solid #cce0f0; /* 이 페이지에만 적용될 테두리 */
+    border-collapse: collapse;
+    width: 90%; /* 또는 원하는 너비 */
+    margin: 20px auto; /* 중앙 정렬 및 위아래 여백 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+form table tr td {
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    vertical-align: center; /* 내용이 위쪽으로 정렬되도록 */
+}
+
+form table tr td:first-child { /* 첫 번째 td (항목 이름) */
+    background-color: #f8f8f8;
+    font-weight: bold;
+    width: 120px; /* 항목 이름 칸 너비 고정 */
+    text-align: center;
+    padding-right: 20px;
+}
+
+/* input, select, textarea 스타일 */
+form table input[type="text"],
+form table select,
+form table textarea {
+    width: calc(100% - 20px); /* 패딩 고려한 너비 */
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* 패딩과 보더가 너비에 포함되도록 */
+}
+
+form table textarea {
+    height: 120px; /* 텍스트 에어리어 높이 조절 */
+    resize: vertical; /* 세로 크기만 조절 가능하게 */
+}
+
+/* 버튼 영역 스타일 */
+form table tr:last-child td {
+/*     background-color: #f2f7fc; */
+    text-align: center;
+    padding: 15px;
+}
+
+form table button {
+    background-color: #eaf6ff;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+form table button[type="submit"] {
+    background-color: #eaf6ff;
+    color: black;
+}
+
+form table button[type="submit"]:hover {
+    background-color: #b1ccfe;
+}
+
+form table button[type="reset"] {
+    background-color: #eaf6ff;
+    color: black;
+}
+
+form table button[type="reset"]:hover {
+    background-color: #b1ccfe;
+}
+
+form table button[onclick*="list.do"] { /* 목록 바로가기 버튼 */
+    background-color: #eaf6ff;
+    color: black;
+}
+
+form table button[onclick*="list.do"]:hover {
+    background-color: #b1ccfe;
+}

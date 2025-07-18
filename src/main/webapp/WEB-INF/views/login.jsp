@@ -7,27 +7,49 @@
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
 </head>
 <body>
-    <h2>로그인</h2>
-    <%-- 로그인 실패 메시지 (Spring Security에서 'error' 파라미터 전달) --%>
-    <c:if test="${param.error != null}">
-        <p class="error-message">아이디 또는 비밀번호가 잘못되었습니다.</p>
-    </c:if>
-    <%-- 로그아웃 성공 메시지 (Spring Security에서 'logout' 파라미터 전달) --%>
-    <c:if test="${param.logout != null}">
-        <p class="success-message">로그아웃되었습니다.</p>
-    </c:if>
+    <div class="container">
+        <h2>로그인</h2>
 
-    <form action="<c:url value="/login"/>" method="post">
-        <div>
-            <label for="username">아이디:</label>
-            <input type="text" id="username" name="username" required />
+        <div class="welcome-message">
+            <p>로그인 페이지에 로그인하고 직원 또는 관리자 계정으로 로그인하여 해당 대시보드에 접속하세요.</p>
         </div>
-        <div>
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" required />
-        </div>
-        <button type="submit">로그인</button>
-    </form>
-    <p>직원 또는 관리자 계정으로 로그인하여 해당 대시보드에 접근하세요.</p>
+
+        <%-- ★★★ param.error 대신 sessionScope.loginError 확인 ★★★ --%>
+        <c:if test="${not empty sessionScope.loginError}">
+            <div class="error-message">
+                <c:out value="${sessionScope.loginError}"/>
+            </div>
+            <%-- 메시지를 표시한 후 세션에서 제거하여 다음 요청 시 다시 표시되지 않도록 함 --%>
+            <c:remove var="loginError" scope="session"/>
+        </c:if>
+
+        <%-- ★★★ 디버깅 메시지는 이제 제거합니다. ★★★ --%>
+        <%-- <p style="color: red; font-weight: bold;">[DEBUG] param.error가 감지되었습니다!</p> --%>
+        <%-- <p style="color: blue;">[DEBUG] param.error가 감지되지 않았습니다.</p> --%>
+        <%-- <p style="color: gray;">[DEBUG] 현재 URL 쿼리 스트링: <%= request.getQueryString() %></p> --%>
+
+        <c:if test="${not empty param.logout}">
+            <div class="success-message">
+                로그아웃되었습니다.
+            </div>
+        </c:if>
+        <c:if test="${not empty errorMessage}">
+            <div class="error-message">
+                <c:out value="${errorMessage}"/>
+            </div>
+        </c:if>
+
+        <form action="<c:url value="/login"/>" method="post">
+            <div class="input-group">
+                <label for="id">아이디:</label>
+                <input type="text" id="id" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">로그인</button>
+        </form>
+    </div>
 </body>
-</html>
+</html> 

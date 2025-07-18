@@ -9,14 +9,15 @@
 </head>
 <body>
     <h2>직원 대시보드</h2>
-    <%-- 현재 로그인한 사용자의 ID 표시 --%>
     <p>환영합니다, <sec:authentication property="principal.username"/>!</p>
 
     <h3>직원 기능</h3>
     <ul>
-        <li><a href="#">내 정보 보기 (TODO)</a></li> <%-- 추후 구현 --%>
-        <li><a href="#">근무 스케줄 (TODO)</a></li> <%-- 추후 구현 --%>
-        <li><a href="#">요청사항 관리 (TODO)</a></li> <%-- 추후 구현 --%>
+        <li><a href="<c:url value="/employee/reports/create"/>">새 보고서 작성</a></li>
+        <li><a href="<c:url value="/employee/reports/my-reports"/>">내 모든 보고서 목록</a></li>
+        <li><a href="<c:url value="/employee/reports/my-reports/daily-weekly-safety"/>">내 일일/주간 안전 리포트</a></li>
+        <li><a href="<c:url value="/employee/reports/my-reports/aircraft-anomaly"/>">내 항공기 이상 보고서</a></li>
+        <li><a href="<c:url value="/employee/reports/my-reports/flight-ground-status"/>">내 운항/지상 상황 보고</a></li> 
     </ul>
 
     <form action="<c:url value="/logout"/>" method="post">

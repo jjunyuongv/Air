@@ -11,9 +11,9 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 @EnableWebSocket
 @RequiredArgsConstructor
-public class WebSocketConfig implements WebSocketConfigurer
+public class ChatSocketConfig implements WebSocketConfigurer
 {
-	private final WebSocketHandler  webSocketHandler;
+	private final ChatHandler  webSocketHandler;
 
 	/*
 		웹소켓에 접속할 수 있는 요청URL을 생성한다. 우리는 

@@ -6,8 +6,20 @@
 <head>
     <title>직원 대시보드</title>
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
+    <style>
+        /* 간단한 홈 버튼 색상(필요 시 style.css로 이동) */
+        .home-btn {
+            display:inline-block; margin:0 0 20px 0;           /* 제목 밑 여백 */
+            padding:8px 18px; border:none; border-radius:6px;
+            background:#1976d2; color:#fff; font-weight:600;
+            text-decoration:none; transition:.25s;
+        }
+        .home-btn:hover { background:#1565c0; }
+    </style>
 </head>
 <body>
+    <!-- 홈으로 버튼 -->
+    <a href="<c:url value='/'/>" class="home-btn">홈으로</a>
     <h2>직원 대시보드</h2>
     <p>환영합니다, <sec:authentication property="principal.username"/>!</p>
 

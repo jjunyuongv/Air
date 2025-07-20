@@ -1,94 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- IApprovalService 인터페이스와 1:1 매핑 -->
 <mapper namespace="com.pj.springboot.approval.IApprovalService">
 
-  <!--────────────────────────────────────────
-      1. 전체 건수 (검색 포함)                   -->
+  <!-- 페이징용 전체 건수 -->
   <select id="getTotalCount" resultType="int"
           parameterType="com.pj.springboot.jdbc.ParameterDTO">
-    SELECT COUNT(*)
-      FROM APPROVAL
-    <if test="searchKeyword != null and !searchKeyword.equals('')">
-      WHERE ${searchField} LIKE '%' || #{searchKeyword} || '%'
+    SELECT COUNT(*) FROM APPROVAL
+    <if test="searchKeyword != null and searchKeyword != ''">
+      WHERE ${searchField} LIKE '%'||#{searchKeyword}||'%'
     </if>
   </select>
 
-  <!--────────────────────────────────────────
-      2. 목록 (페이징)                         -->
+  <!-- 목록 -->
   <select id="listPage"
           resultType="com.pj.springboot.approval.ApprovalDTO"
           parameterType="com.pj.springboot.jdbc.ParameterDTO">
-    SELECT *
-      FROM (
-        SELECT A.*, ROWNUM rnum
-          FROM (
-            SELECT *
-              FROM APPROVAL
-            <if test="searchKeyword != null and !searchKeyword.equals('')">
-              WHERE ${searchField} LIKE '%' || #{searchKeyword} || '%'
-            </if>
-            ORDER BY CREATED_AT DESC
-          ) A
-         WHERE ROWNUM &lt;= #{end}
-      )
-     WHERE rnum &gt;= #{start}
+    SELECT * FROM (
+       SELECT A.*, ROWNUM rnum FROM (
+         SELECT * FROM APPROVAL
+         <if test="searchKeyword != null and searchKeyword != ''">
+           WHERE ${searchField} LIKE '%'||#{searchKeyword}||'%'
+         </if>
+         ORDER BY CREATED_AT DESC
+       ) A
+       WHERE ROWNUM &lt;= #{end}
+    )
+    WHERE rnum &gt;= #{start}
   </select>
 
-  <!--────────────────────────────────────────
-      3. 작성 (INSERT)                        -->
-  <insert id="create"
-          parameterType="com.pj.springboot.approval.ApprovalDTO">
-    INSERT INTO APPROVAL (
-        APPROVAL_NO,
-        DRAFT_USER_ID,
-        TITLE,
-        CONTENT,
-        CATEGORY,
-        STATUS,
-        CREATED_AT
-    ) VALUES (
-        SEQ_APPROVAL.NEXTVAL,
-        #{draftUserId, jdbcType=VARCHAR},
-        #{title,        jdbcType=VARCHAR},
-        #{content,      jdbcType=CLOB},
-        #{category,     jdbcType=VARCHAR},
-        #{status,       jdbcType=VARCHAR},
-        SYSTIMESTAMP
-    )
+  <!-- 상세 -->
+  <select id="view" parameterType="long"
+          resultType="com.pj.springboot.approval.ApprovalDTO">
+    SELECT * FROM APPROVAL WHERE APPROVAL_NO = #{approvalNo}
+  </select>
+
+  <!-- 작성 -->
+  <insert id="create" parameterType="com.pj.springboot.approval.ApprovalDTO">
+    INSERT INTO APPROVAL
+      (APPROVAL_NO, DRAFT_USER_ID, TITLE, CONTENT,
+       CATEGORY, STATUS, CREATED_AT)
+    VALUES
+      (SEQ_APPROVAL.NEXTVAL, #{draftUserId}, #{title}, #{content},
+       #{category}, #{status}, SYSTIMESTAMP)
   </insert>
 
-  <!--────────────────────────────────────────
-      4. 상세 보기                            -->
-  <select id="view"
-          resultType="com.pj.springboot.approval.ApprovalDTO"
-          parameterType="long">
-    SELECT *
-      FROM APPROVAL
-     WHERE APPROVAL_NO = #{approvalNo}
-  </select>
-
-  <!--────────────────────────────────────────
-      5. 수정 (UPDATE)                       -->
-  <update id="update"
-          parameterType="com.pj.springboot.approval.ApprovalDTO">
+  <!-- 수정 -->
+  <update id="update" parameterType="com.pj.springboot.approval.ApprovalDTO">
     UPDATE APPROVAL
-       SET TITLE        = #{title},
-           CONTENT      = #{content},
-           CATEGORY     = #{category},
-           STATUS       = #{status},
-           COMPLETED_AT = #{completedAt}
-     WHERE APPROVAL_NO  = #{approvalNo}
+       SET TITLE = #{title},
+           CONTENT = #{content},
+           CATEGORY = #{category}
+     WHERE APPROVAL_NO = #{approvalNo}
   </update>
 
-  <!--────────────────────────────────────────
-      6. 삭제 (DELETE)                       -->
+  <!-- 상태 변경 (승인/반려) -->
+  <update id="updateStatus">
+    UPDATE APPROVAL
+       SET STATUS = #{status},
+           COMPLETED_AT = SYSTIMESTAMP
+     WHERE APPROVAL_NO = #{approvalNo}
+  </update>
+
+  <!-- 삭제 -->
   <delete id="delete" parameterType="long">
     DELETE FROM APPROVAL WHERE APPROVAL_NO = #{approvalNo}
   </delete>
-
 </mapper>

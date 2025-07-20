@@ -1,6 +1,7 @@
 package com.pj.springboot.approval;
 
 import java.util.*;
+import java.security.Principal;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,89 +15,78 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/approval")
-@RequiredArgsConstructor          // ⇒ 생성자 주입
+@RequiredArgsConstructor
 public class ApprovalController {
 
-    /* ① BoardService → ApprovalService   (인터페이스 이름 원하는 대로) */
-    private final IApprovalService service;
+    private final ApprovalService service;          // ✅ Service 주입
 
-    /*──────────────── 목록 ────────────────*/
+    /* ───────── 목록 ───────── */
     @GetMapping("/list")
     public String list(Model model,
-                       HttpServletRequest req,
-                       ParameterDTO param) {
-
-        int totalCount = service.getTotalCount(param);
+                       @RequestParam(defaultValue = "1") int pageNum,
+                       ParameterDTO param,
+                       HttpServletRequest req) {
 
         final int pageSize = 10, blockPage = 5;
-        int pageNum = Optional.ofNullable(req.getParameter("pageNum"))
-                              .filter(s -> !s.isBlank())
-                              .map(Integer::parseInt)
-                              .orElse(1);
-
         param.setStart((pageNum - 1) * pageSize + 1);
         param.setEnd(pageNum * pageSize);
 
-        /* ② BoardDTO → ApprovalDTO */
-        List<ApprovalDTO> lists = service.listPage(param);
+        int total              = service.getTotalCount(param);
+        List<ApprovalDTO> list = service.listPage(param);
 
         model.addAttribute("maps", Map.of(
-            "totalCount", totalCount,
-            "pageSize",   pageSize,
-            "pageNum",    pageNum));
-        model.addAttribute("lists", lists);
-
-        String pagingImg = PagingUtil.pagingImg(
-            totalCount, pageSize, blockPage, pageNum,
-            req.getContextPath() + "/approval/list?");
-        model.addAttribute("pagingImg", pagingImg);
+                "totalCount", total,
+                "pageSize",   pageSize,
+                "pageNum",    pageNum));
+        model.addAttribute("lists", list);
+        model.addAttribute("pagingImg",
+                PagingUtil.pagingImg(total, pageSize, blockPage, pageNum,
+                        req.getContextPath() + "/approval/list?"));
 
         return "approval/list";
     }
 
-    /*──────────────── 작성 화면 ────────────*/
+    /* ───────── 작성 화면 / 처리 ───────── */
     @GetMapping("/write")
-    public String writeForm() {
+    public String writeForm(Model model) {
+        model.addAttribute("approval", new ApprovalDTO());
         return "approval/write";
     }
 
-    /*──────────────── 작성 처리 ────────────*/
     @PostMapping("/write")
-    public String write(HttpServletRequest req) {
-
-        ApprovalDTO dto = new ApprovalDTO();
-        dto.setDraftUserId(req.getParameter("draftUserId"));   // 로그인 ID
-        dto.setTitle      (req.getParameter("title"));
-        dto.setContent    (req.getParameter("content"));
-        dto.setCategory   (req.getParameter("category"));
+    public String write(@ModelAttribute ApprovalDTO dto, Principal principal) {
+        dto.setDraftUserId(principal.getName());
         dto.setStatus("DRAFT");
-
         service.create(dto);
         return "redirect:/approval/list";
     }
 
-    /*──────────────── 상세 ────────────────*/
+    /* ───────── 상세 / 수정 ───────── */
     @GetMapping("/view")
     public String view(@RequestParam Long approvalNo, Model model) {
         model.addAttribute("approval", service.view(approvalNo));
         return "approval/view";
     }
 
-    /*──────────────── 수정 화면 ────────────*/
-    @GetMapping("/edit")
-    public String editForm(@RequestParam Long approvalNo, Model model) {
-        model.addAttribute("approval", service.view(approvalNo));
-        return "approval/edit";
-    }
-
-    /*──────────────── 수정 처리 ────────────*/
     @PostMapping("/edit")
-    public String edit(ApprovalDTO dto) {
+    public String edit(@ModelAttribute ApprovalDTO dto) {
         service.update(dto);
         return "redirect:/approval/view?approvalNo=" + dto.getApprovalNo();
     }
 
-    /*──────────────── 삭제 ────────────────*/
+    /* ───────── 승인 / 반려 / 삭제 ───────── */
+    @PostMapping("/approve")
+    public String approve(@RequestParam Long approvalNo, Principal principal) {
+        service.changeStatus(approvalNo, "APPROVED", principal.getName());
+        return "redirect:/approval/list";
+    }
+
+    @PostMapping("/reject")
+    public String reject(@RequestParam Long approvalNo, Principal principal) {
+        service.changeStatus(approvalNo, "REJECTED", principal.getName());
+        return "redirect:/approval/list";
+    }
+
     @PostMapping("/delete")
     public String delete(@RequestParam Long approvalNo) {
         service.delete(approvalNo);

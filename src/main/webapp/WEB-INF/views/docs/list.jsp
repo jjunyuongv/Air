@@ -9,7 +9,7 @@
 </head>
 	<body>
     <link rel="stylesheet" href="<c:url value="/css/list.css"/>">
-	<h2>전자결재</h2>
+	<h2>문서보관소</h2>
 	<form method="get">
 	<table width="90%">
 	<tr>
@@ -72,7 +72,15 @@
 	<tr>
 	    <td> ${pagingImg}
 	        </td>
-	        <td style="text-align: right;"><button type="button"
+	        <td style="text-align: right;">
+	        <!-- 홈으로 버튼 -->
+            <button type="button"
+                    onclick="location.href='${ctx}/';"
+                    class="write-button"
+                    style="margin-right:6px;">
+                홈으로
+            </button>
+	        <button type="button"
 	            onclick="location.href='./write.do';"
 	            class="write-button">글쓰기</button>
 	        </td>

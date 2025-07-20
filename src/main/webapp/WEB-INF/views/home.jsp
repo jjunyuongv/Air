@@ -50,9 +50,7 @@
         <li class="nav-item me-3"><a class="nav-link" href="/admin/dashboard">업무보고시스템(관리자)</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/employee/dashboard">업무보고시스템</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/chatMain">커뮤니케이션기능</a></li>
-        <li class="nav-item me-3"><a class="nav-link" href="/qna/list">고객응대공유</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/calendar">일정관리</a></li>
-        <li class="nav-item me-3"><a class="nav-link" href="/mypage">마이페이지</a></li>
       </ul>
       <div class="d-flex">
         <a class="nav-link" href="/login">로그인/회원가입</a>

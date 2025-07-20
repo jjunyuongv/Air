@@ -10,7 +10,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
-public class WebSocketHandler extends TextWebSocketHandler
+public class ChatHandler extends TextWebSocketHandler
 {
 	/*
 	채팅을 위한 접속자의 정보를 저장하기 위해 Map형식의 컬렉션을 생성한다. 

@@ -87,6 +87,20 @@
         #eventModal .modal-footer {
             border-top: none;
         }
+         .btn-home {
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 0.6rem 2rem;
+            font-weight: 600;
+            transition: all .3s;
+        }
+        .btn-home:hover {
+            background: #1565c0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(25,118,210,0.3);
+        }
     </style>
 </head>
 <body>
@@ -113,6 +127,15 @@
         <div class="main-content">
             <h1><i class="bi bi-calendar"></i> 일정 관리</h1>
             <div id='calendar'></div>
+            
+            <!-- 달력 밑 버튼 영역 -->
+            <div class="d-flex justify-content-end mt-4">
+                <button type="button"
+                        class="btn-home"
+                        onclick="location.href='${pageContext.request.contextPath}/';">
+                    <i class="bi bi-house me-1"></i> 홈으로
+                </button>
+            </div>
 
             <div id="eventModal" class="modal fade" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
                 <div class="modal-dialog">

@@ -4,7 +4,7 @@
 form table {
     border: 1px solid #cce0f0; /* 이 페이지에만 적용될 테두리 */
     border-collapse: collapse;
-    width: 90%; /* 또는 원하는 너비 */
+    width: 100%; /* 또는 원하는 너비 */
     margin: 20px auto; /* 중앙 정렬 및 위아래 여백 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 }

@@ -42,27 +42,27 @@
         <table border="1" width="90%">
             <tr>
                 <td>작성자</td>
-                <td><input type="text" name="regUserId" style="width:150px;" /></td>
+                <td><input type="text" name="regUserId" style="width:100%;" /></td>
             </tr>
             <tr>
                 <td>자료 구분</td>
                 <td>
                     <select name="archType" style="width:200px;">
                         <option value="">-- 선택하세요 --</option>
-                        <option value="10">운항매뉴얼</option>
-                        <option value="20">기내서비스</option>
-                        <option value="30">안전교육</option>
+                        <option value="10">근무변경신청</option>
+                        <option value="20">휴가신청</option>
+                        <option value="30">긴급 운항 변경</option>
                     </select>
                  
 	           </td>
             </tr>
             <tr>
                 <td>제목</td>
-                <td><input type="text" name="archTitle" style="width:90%;" /></td>
+                <td><input type="text" name="archTitle" style="width:100%;" /></td>
             </tr>
             <tr>
                 <td>내용</td>
-                <td><textarea name="archCtnt" style="width:90%;height:100px;"></textarea></td>
+                <td><textarea name="archCtnt" style="width:100%;height:100px;"></textarea></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">

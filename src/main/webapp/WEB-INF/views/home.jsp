@@ -58,10 +58,10 @@
         <a class="nav-link" href="/login">로그인/회원가입</a>
       </div>
   	</nav>
-
-    <div class="main-content">
-        <img src="<c:url value="/image/Generated.png"/>" alt="그룹웨어 메인 로고" class="main-logo">
-    </div>
+		<div class="main-content">
+		    <img src="<c:url value='/image/Generated.png' />"
+		         alt="그룹웨어 메인 로고" class="main-logo">
+		</div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

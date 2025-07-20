@@ -9,7 +9,7 @@
 </head>
 	<body>
     <link rel="stylesheet" href="<c:url value="/css/list.css"/>">
-	<h2>문서보관함</h2>
+	<h2>전자결재</h2>
 	<form method="get">
 	<table width="90%">
 	<tr>

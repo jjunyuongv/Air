@@ -46,11 +46,10 @@
     </a>
       <ul class="navbar-nav mx-auto d-flex flex-row">
         <li class="nav-item me-3"><a class="nav-link" href="/approval/list">전자결재시스템</a></li>
-        <li class="nav-item me-3"><a class="nav-link" href="../list.do">문서보관소</a></li>
+        <li class="nav-item me-3"><a class="nav-link" href="/docs/dashboard.do">문서보관소</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/admin/dashboard">업무보고시스템(관리자)</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/employee/dashboard">업무보고시스템</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/chatMain">커뮤니케이션기능</a></li>
-        <li class="nav-item me-3"><a class="nav-link" href="/docs/voc">고객응대공유</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/calendar">일정관리</a></li>
       </ul>
       <div class="d-flex">

@@ -50,6 +50,7 @@
         <li class="nav-item me-3"><a class="nav-link" href="/admin/dashboard">업무보고시스템(관리자)</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/employee/dashboard">업무보고시스템</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/chatMain">커뮤니케이션기능</a></li>
+        <li class="nav-item me-3"><a class="nav-link" href="/docs/voc">고객응대공유</a></li>
         <li class="nav-item me-3"><a class="nav-link" href="/calendar">일정관리</a></li>
       </ul>
       <div class="d-flex">
@@ -57,7 +58,7 @@
       </div>
   	</nav>
 		<div class="main-content">
-		    <img src="<c:url value='/image/Generated.png' />"
+		    <img src="<c:url value='/image/Generated.png'/>"
 		         alt="그룹웨어 메인 로고" class="main-logo">
 		</div>
 

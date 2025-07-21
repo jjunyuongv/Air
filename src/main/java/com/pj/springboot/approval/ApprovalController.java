@@ -68,8 +68,18 @@ public class ApprovalController {
         return "approval/view";
     }
 
+    /* ───────── 수정 ───────── */
+    // ① 수정 화면(GET)
+    @GetMapping("/edit")
+    public String editForm(@RequestParam Long approvalNo, Model model) {
+        model.addAttribute("approval", service.view(approvalNo));
+        return "approval/edit";
+    }
+
+    // ② 수정 처리(POST)
     @PostMapping("/edit")
-    public String edit(@ModelAttribute ApprovalDTO dto) {
+    public String edit(@ModelAttribute ApprovalDTO dto, Principal principal) {
+        dto.setDraftUserId(principal.getName()); // 작성자 보존
         service.update(dto);
         return "redirect:/approval/view?approvalNo=" + dto.getApprovalNo();
     }

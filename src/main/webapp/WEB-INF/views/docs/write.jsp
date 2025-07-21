@@ -49,9 +49,9 @@
                 <td>
                     <select name="archType" style="width:200px;">
                         <option value="">-- 선택하세요 --</option>
-                        <option value="10">근무변경신청</option>
-                        <option value="20">휴가신청</option>
-                        <option value="30">긴급 운항 변경</option>
+                         <option value="10">운항매뉴얼</option>
+                        <option value="20">기내서비스</option>
+                        <option value="30">안전교육</option>
                     </select>
                  
 	           </td>

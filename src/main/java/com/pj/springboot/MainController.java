@@ -98,7 +98,6 @@ public class MainController {
 	{
 	    BoardDTO dto = new BoardDTO();
 
-	    // ✅ 수정: 파라미터 이름을 JSP와 동일하게
         dto.setArchType(req.getParameter("archType"));
         dto.setArchTitle(req.getParameter("archTitle"));
         dto.setArchCtnt(req.getParameter("archCtnt"));

@@ -1,3 +1,4 @@
+<!-- 준영 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -6,11 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>웹소켓 채팅</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
@@ -54,7 +52,6 @@
 
       .form-floating { margin-bottom: 1.5rem; }
 
-      /* 채팅 참여 버튼 */
       .btn-chat-join {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border: none;
@@ -69,7 +66,6 @@
         box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
       }
 
-      /* 홈으로 버튼 – 같은 느낌만 유지하고 투명/테두리 스타일 */
       .btn-home {
         background: transparent;
         border: 2px solid #667eea;
@@ -120,12 +116,10 @@
 
   <body>
     <div class="chat-welcome-card">
-      <!-- 상단 아이콘 & 제목 -->
       <div class="chat-icon"><i class="bi bi-chat-dots"></i></div>
       <h1 class="welcome-title">Chat</h1>
       <p class="welcome-subtitle">실시간 채팅으로 여행 이야기를 나누어보세요</p>
 
-      <!-- 대화명 입력 & 채팅 참여 -->
       <form id="chatForm">
         <div class="form-floating">
           <input type="text" class="form-control" id="chatId" placeholder="대화명을 입력하세요" required>
@@ -140,16 +134,13 @@
         </button>
       </form>
 
-      <!-- ▶ 홈으로 버튼 (여기 추가) -->
       <button type="button"
               class="btn btn-home"
               onclick="location.href='<%= request.getContextPath() %>/';">
         <i class="bi bi-house me-2"></i>
         홈으로
       </button>
-      <!-- ◀ 홈으로 버튼 -->
 
-      <!-- 기능 아이콘 설명 -->
       <div class="features">
         <div class="feature-item">
           <div class="feature-icon"><i class="bi bi-lightning-charge"></i></div>
@@ -166,7 +157,6 @@
       </div>
     </div>
 
-    <!-- Bootstrap & jQuery -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
@@ -187,16 +177,14 @@
         idBox.value = "";
       }
 
-      // Enter 키로 채팅 참여
-      document.getElementById("chatId").addEventListener("keypress", function (event) {
+      	document.getElementById("chatId").addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
           event.preventDefault();
           chatWinOpen();
         }
       });
 
-      // 알림 (Bootstrap alert 커스텀)
-      function showAlert(message, type) {
+	    function showAlert(message, type) {
         const alertDiv = document.createElement("div");
         alertDiv.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
         alertDiv.style.cssText = "top:20px; right:20px; z-index:9999; min-width:300px;";

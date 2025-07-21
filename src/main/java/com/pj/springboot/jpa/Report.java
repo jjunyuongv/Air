@@ -1,5 +1,7 @@
 package com.pj.springboot.jpa;
 
+/*현석*/
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,12 +40,10 @@ public class Report {
     @JoinColumn(name = "AUTHOR_ID", insertable = false, updatable = false)
     private User author;
 
-    // ★★★ JsonFormat 어노테이션 추가 (선택 사항이지만 좋은 습관) ★★★
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "CREATED_AT", nullable = false)
     private LocalDateTime createdAt;
 
-    // ★★★ JsonFormat 어노테이션 추가 (선택 사항이지만 좋은 습관) ★★★
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name = "UPDATED_AT", nullable = false)
     private LocalDateTime updatedAt;

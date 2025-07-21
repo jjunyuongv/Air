@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         events: '/api/schedules',
         select: function(info) {
             currentEvent = null;
-            document.getElementById('eventId').value = ''; // 비워야 새로 insert됨
+            document.getElementById('eventId').value = '';
             document.getElementById('eventTitle').value = '';
             document.getElementById('eventStartDate').value = moment(info.startStr).format('YYYY-MM-DDTHH:mm');
             let defaultEndTime = moment(info.startStr).add(1, 'hours').format('YYYY-MM-DDTHH:mm');
@@ -83,9 +83,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (allDay) endTime = null;
 
-        // scheduleId도 반드시 같이 보냄!
         var scheduleData = {
-            scheduleId: scheduleId ? Number(scheduleId) : null,   // 추가
+            scheduleId: scheduleId ? Number(scheduleId) : null,   
             userId: userId,
             title: title,
             startTime: startTime,

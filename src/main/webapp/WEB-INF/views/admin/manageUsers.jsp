@@ -1,3 +1,4 @@
+<!-- 현석 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
@@ -10,7 +11,6 @@
 <body>
     <h2>사용자 관리</h2>
 
-    <%-- 메시지 표시 --%>
     <c:if test="${not empty successMessage}">
         <div class="success-message"><c:out value="${successMessage}"/></div>
     </c:if>
@@ -48,7 +48,6 @@
                         </span>
                     </td>
                     <td class="action-buttons">
-                        <%-- ★★★ 관리자 계정이 아닌 경우에만 수정/삭제 버튼 표시 ★★★ --%>
                         <c:set var="isAdminUser" value="false"/>
                         <c:forEach var="role" items="${user.roles}">
                             <c:if test="${role.roleName eq 'ROLE_ADMIN'}">

@@ -1,5 +1,8 @@
 package com.pj.springboot.jpa;
 
+/*현석*/
+
+
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -96,11 +99,9 @@ public class SecurityConfig {
         return (request, response, exception) -> {
             logger.warn("로그인 실패! 사용자: {}, 오류: {}", request.getParameter("username"), exception.getMessage());
 
-            // ★★★ 세션에 오류 메시지 저장 ★★★
             HttpSession session = request.getSession();
             session.setAttribute("loginError", "아이디 또는 비밀번호가 올바르지 않습니다.");
 
-            // ★★★ /login으로만 리다이렉트 (쿼리 파라미터 없이) ★★★
             response.sendRedirect("/login");
         };
     }

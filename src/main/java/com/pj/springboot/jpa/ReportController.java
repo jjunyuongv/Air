@@ -1,5 +1,8 @@
 package com.pj.springboot.jpa;
 
+/*현석*/
+
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +37,6 @@ public class ReportController {
         this.reportService = reportService;
     }
 
-    // 보고서 객체를 Map으로 변환하여 날짜 필드를 String으로 포맷팅하는 헬퍼 메서드
     private List<Map<String, Object>> convertReportsToDisplayMap(List<Report> reports) {
         return reports.stream().map(report -> {
             Map<String, Object> map = new HashMap<>();
@@ -49,7 +51,6 @@ public class ReportController {
         }).collect(Collectors.toList());
     }
 
-    // 단일 보고서 객체를 Map으로 변환 (열람 페이지에서 사용)
     private Map<String, Object> convertReportToDisplayMap(Report report) {
         Map<String, Object> map = new HashMap<>();
         map.put("id", report.getId());
@@ -61,9 +62,6 @@ public class ReportController {
         map.put("updatedAt", report.getUpdatedAt() != null ? report.getUpdatedAt().format(DATE_TIME_FORMATTER) : null);
         return map;
     }
-
-
-    // --- 직원 보고서 기능 ---
 
     @GetMapping("/employee/reports/create")
     public String showCreateReportForm(Model model) {
@@ -131,17 +129,15 @@ public class ReportController {
         return "employee/myReportsByType";
     }
 
-    // ★★★ 새로운 매핑: 보고서 열람 (직원용) ★★★
     @GetMapping("/employee/reports/view")
     public String viewReport(@RequestParam("id") Long reportId, Model model, RedirectAttributes redirectAttributes) {
         try {
             Report report = reportService.getReportById(reportId)
                                         .orElseThrow(() -> new RuntimeException("보고서를 찾을 수 없습니다."));
-            model.addAttribute("report", convertReportToDisplayMap(report)); // Map으로 변환하여 전달
-            return "employee/viewReport"; // 새로운 JSP 파일
+            model.addAttribute("report", convertReportToDisplayMap(report)); 
+            return "employee/viewReport"; 
         } catch (RuntimeException e) {
             redirectAttributes.addFlashAttribute("errorMessage", "보고서 열람 중 오류 발생: " + e.getMessage());
-            // 어떤 목록에서 왔는지 알 수 없으므로, 기본 내 보고서 목록으로 리다이렉트
             return "redirect:/employee/reports/my-reports";
         }
     }
@@ -240,7 +236,6 @@ public class ReportController {
         return "admin/allReportsByType";
     }
 
-    // ★★★ 새로운 매핑: 보고서 열람 (관리자용) ★★★
     @GetMapping("/admin/reports/view")
     public String viewAdminReport(@RequestParam("id") Long reportId, Model model, RedirectAttributes redirectAttributes) {
         try {

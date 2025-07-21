@@ -1,3 +1,4 @@
+<!-- 윤아 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -111,12 +112,10 @@
         </a>
         <ul class="navbar-nav mx-auto d-flex flex-row">
             <li class="nav-item me-3"><a class="nav-link" href="/approval/list">전자결재시스템</a></li>
-            <li class="nav-item me-3"><a class="nav-link" href="/docs/list">문서보관소</a></li>
+            <li class="nav-item me-3"><a class="nav-link" href="/docs/dashboard.do"">문서보관소</a></li>
             <li class="nav-item me-3"><a class="nav-link" href="/report/list">업무보고시스템</a></li>
             <li class="nav-item me-3"><a class="nav-link" href="/message/inbox">커뮤니케이션기능</a></li>
-            <li class="nav-item me-3"><a class="nav-link" href="/qna/list">고객응대공유</a></li>
             <li class="nav-item me-3"><a class="nav-link" href="/calendar">일정관리</a></li>
-            <li class="nav-item me-3"><a class="nav-link" href="/mypage">마이페이지</a></li>
         </ul>
         <div class="d-flex">
             <a class="nav-link" href="/login">로그인/회원가입</a>

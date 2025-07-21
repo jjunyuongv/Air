@@ -1,5 +1,7 @@
 package com.pj.springboot.approval;
 
+/*준영*/
+
 import java.util.*;
 import java.security.Principal;
 
@@ -18,9 +20,8 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class ApprovalController {
 
-    private final ApprovalService service;          // ✅ Service 주입
+    private final ApprovalService service;    
 
-    /* ───────── 목록 ───────── */
     @GetMapping("/list")
     public String list(Model model,
                        @RequestParam(defaultValue = "1") int pageNum,
@@ -46,7 +47,6 @@ public class ApprovalController {
         return "approval/list";
     }
 
-    /* ───────── 작성 화면 / 처리 ───────── */
     @GetMapping("/write")
     public String writeForm(Model model) {
         model.addAttribute("approval", new ApprovalDTO());
@@ -61,30 +61,25 @@ public class ApprovalController {
         return "redirect:/approval/list";
     }
 
-    /* ───────── 상세 / 수정 ───────── */
     @GetMapping("/view")
     public String view(@RequestParam Long approvalNo, Model model) {
         model.addAttribute("approval", service.view(approvalNo));
         return "approval/view";
     }
 
-    /* ───────── 수정 ───────── */
-    // ① 수정 화면(GET)
     @GetMapping("/edit")
     public String editForm(@RequestParam Long approvalNo, Model model) {
         model.addAttribute("approval", service.view(approvalNo));
         return "approval/edit";
     }
 
-    // ② 수정 처리(POST)
     @PostMapping("/edit")
     public String edit(@ModelAttribute ApprovalDTO dto, Principal principal) {
-        dto.setDraftUserId(principal.getName()); // 작성자 보존
+        dto.setDraftUserId(principal.getName());
         service.update(dto);
         return "redirect:/approval/view?approvalNo=" + dto.getApprovalNo();
     }
 
-    /* ───────── 승인 / 반려 / 삭제 ───────── */
     @PostMapping("/approve")
     public String approve(@RequestParam Long approvalNo, Principal principal) {
         service.changeStatus(approvalNo, "APPROVED", principal.getName());

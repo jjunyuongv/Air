@@ -1,3 +1,4 @@
+<!-- 윤아 -->
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -10,8 +11,8 @@
     body {
       background: linear-gradient(to bottom right, #e3f2fd, #ffffff);
       min-height: 100vh;
-      display: flex; /* flexbox를 사용하여 본문 내용을 중앙에 배치하기 위함 */
-      flex-direction: column; /* 세로 방향으로 정렬 */
+      display: flex; 
+      flex-direction: column; 
     }
     .navbar-nav .nav-link {
       font-weight: 500;
@@ -21,20 +22,20 @@
       font-weight: bold;
       color: #0d47a1 !important;
     }
-    .main-content { /* 본문 내용을 위한 스타일 */
-      flex-grow: 1; /* 남은 공간을 모두 차지하도록 하여 중앙 정렬을 도움 */
+    .main-content { 
+      flex-grow: 1; 
       display: flex;
-      justify-content: center; /* 수평 중앙 정렬 */
-      align-items: center; /* 수직 중앙 정렬 */
-      padding: 0px; /* 내부 여백 */
+      justify-content: center; 
+      align-items: center; 
+      padding: 0px; 
     }
-    .main-logo { /* 이미지 스타일 */
-      max-width: 100%; /* 이미지 최대 너비 */
-      height: auto; /* 비율 유지 */
-      display: block; /* margin: auto를 위해 블록 요소로 설정 */
-      margin: 0 auto; /* 수평 중앙 정렬 */
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 그림자 효과 */
-      border-radius: 8px; /* 모서리 둥글게 */
+    .main-logo { 
+      max-width: 100%; 
+      height: auto; 
+      display: block; 
+      margin: 0 auto; 
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+      border-radius: 8px; 
     }
   </style>
 </head>

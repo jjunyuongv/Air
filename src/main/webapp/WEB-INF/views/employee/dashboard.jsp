@@ -1,3 +1,4 @@
+<!-- 현석 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
@@ -7,9 +8,8 @@
     <title>직원 대시보드</title>
     <link rel="stylesheet" href="<c:url value="/css/style.css"/>">
     <style>
-        /* 간단한 홈 버튼 색상(필요 시 style.css로 이동) */
         .home-btn {
-            display:inline-block; margin:0 0 20px 0;           /* 제목 밑 여백 */
+            display:inline-block; margin:0 0 20px 0;         
             padding:8px 18px; border:none; border-radius:6px;
             background:#1976d2; color:#fff; font-weight:600;
             text-decoration:none; transition:.25s;
@@ -18,7 +18,6 @@
     </style>
 </head>
 <body>
-    <!-- 홈으로 버튼 -->
     <a href="<c:url value='/'/>" class="home-btn">홈으로</a>
     <h2>직원 대시보드</h2>
     <p>환영합니다, <sec:authentication property="principal.username"/>!</p>

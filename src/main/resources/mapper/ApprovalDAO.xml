@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 준영 -->
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.pj.springboot.approval.IApprovalService">
 
-  <!-- 페이징용 전체 건수 -->
   <select id="getTotalCount" resultType="int"
           parameterType="com.pj.springboot.jdbc.ParameterDTO">
     SELECT COUNT(*) FROM APPROVAL
@@ -14,7 +14,6 @@
     </if>
   </select>
 
-  <!-- 목록 -->
   <select id="listPage"
           resultType="com.pj.springboot.approval.ApprovalDTO"
           parameterType="com.pj.springboot.jdbc.ParameterDTO">
@@ -31,13 +30,11 @@
     WHERE rnum &gt;= #{start}
   </select>
 
-  <!-- 상세 -->
   <select id="view" parameterType="long"
           resultType="com.pj.springboot.approval.ApprovalDTO">
     SELECT * FROM APPROVAL WHERE APPROVAL_NO = #{approvalNo}
   </select>
 
-  <!-- 작성 -->
   <insert id="create" parameterType="com.pj.springboot.approval.ApprovalDTO">
     INSERT INTO APPROVAL
       (APPROVAL_NO, DRAFT_USER_ID, TITLE, CONTENT,
@@ -47,7 +44,6 @@
        #{category}, #{status}, SYSTIMESTAMP)
   </insert>
 
-  <!-- 수정 -->
   <update id="update" parameterType="com.pj.springboot.approval.ApprovalDTO">
     UPDATE APPROVAL
        SET TITLE = #{title},
@@ -56,7 +52,6 @@
      WHERE APPROVAL_NO = #{approvalNo}
   </update>
 
-  <!-- 상태 변경 (승인/반려) -->
   <update id="updateStatus">
     UPDATE APPROVAL
        SET STATUS = #{status},
@@ -64,7 +59,6 @@
      WHERE APPROVAL_NO = #{approvalNo}
   </update>
 
-  <!-- 삭제 -->
   <delete id="delete" parameterType="long">
     DELETE FROM APPROVAL WHERE APPROVAL_NO = #{approvalNo}
   </delete>

@@ -1,3 +1,4 @@
+<!-- 현석 -->
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -9,7 +10,6 @@
 <body>
     <h2>사용자 수정</h2>
 
-    <%-- 메시지 표시 --%>
     <c:if test="${not empty successMessage}">
         <div class="success-message"><c:out value="${successMessage}"/></div>
     </c:if>
